@@ -22,15 +22,15 @@ class Scraper
     profile = {}
     social_profiles = kicks.css(".social-icon-container").css("a").map{ |link| link.attribute("href").value}
 
-    social_profiles.collect{|s|
+    social_profiles.collect{|s| 
       if s.include?("twitter"){
-        profile[:twitter] => s
+        profile[:twitter] = s
       } elsif s.include?("github"){
-        profile[:github] => s
+        profile[:github] = s
       } elsif s.include?("linkedin"){
-        profile[:linkedin] => s
+        profile[:linkedin] = s
       } else s.include?("blog") {
-      profile[:blog] => s
+      profile[:blog] = s
       }
       end
     }
