@@ -24,21 +24,21 @@ class Scraper
     social_profiles.collect{|s|
       if s.include?("twitter")
       {
-        profile[:twitter] => s
+        profile[:twitter] = s
       } elsif s.include?("github")
       {
-        profile[:github] => s
+        profile[:github] = s
       } elsif s.include?("linkedin")
       {
-        profile[:linkedin] => s
+        profile[:linkedin] = s
       } else s.include?("blog")
       {
-      profile[:blog] => s
+      profile[:blog] = s
     }
     end
     }
-    profile[:profile_quote]=> profile.css(".vitals-text-container div.profile-quote").text,
-    profile[:bio] => kicks.css(".description-holder").css("div p").text
+    profile[:profile_quote] = profile.css(".vitals-text-container div.profile-quote").text,
+    profile[:bio] = kicks.css(".description-holder").css("div p").text
 
     profile
 
