@@ -37,7 +37,7 @@ class Scraper
     }
     end
     }
-    profile[:profile_quote] = profile.css(".vitals-text-container div.profile-quote").text,
+    profile[:profile_quote] = profile.css(".vitals-text-container div.profile-quote").text
     profile[:bio] = kicks.css(".description-holder").css("div p").text
 
     profile
