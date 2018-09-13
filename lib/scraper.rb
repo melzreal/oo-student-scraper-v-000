@@ -21,23 +21,21 @@ class Scraper
     kicks = Nokogiri::HTML(open(profile_url))
     profile = {}
     social_profiles = kicks.css(".social-icon-container").css("a").map{ |link| link.attribute("href").value}
+
     social_profiles.collect{|s|
-      if s.include?("twitter")
-      {
+      if s.include?("twitter"){
         profile[:twitter] => s
-      } elsif s.include?("github")
-      {
+      } elsif s.include?("github"){
         profile[:github] => s
-      } elsif s.include?("linkedin")
-      {
-        profile[:linkedin] => s
-      } else s.include?("blog")
-      {
+      } elsif s.include?("linkedin"){
+        profile[:linkedin] => s      
+      } else s.include?("blog") {
       profile[:blog] => s
+      }
+      end
     }
-    end
-    }
-    profile[:profile_quote] => profile.css(".vitals-text-container div.profile-quote").text
+    
+    profile[:profile_quote] => kicks.css(".vitals-container").css(".vitals-text-container div.profile-quote").text
     profile[:bio] => kicks.css(".description-holder").css("div p").text
 
     profile
