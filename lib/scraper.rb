@@ -19,32 +19,29 @@ class Scraper
 
   def self.scrape_profile_page(profile_url)
     kicks = Nokogiri::HTML(open(profile_url))
-    profiles = []
+    profile = {}
     social_profiles = kicks.css(".social-icon-container").css("a").map{ |link| link.attribute("href").value}
     social_profiles.collect{|s|
+    
       if s.include?("twitter")
-      profiles << {
-        :twitter => s
+      {
+        profile[:twitter] => s
       } elsif s.include?("github")
-      profiles << {
-        :github => s
+      {
+        profile[:github] => s
       } elsif s.include?("linkedin")
-      profiles << {
-        :linkedin => s
+      {
+        profile[:linkedin] => s
       } else s.include?("blog")
-    profiles << {
-      :blog => s
+      {
+      profile[:blog] => s
     }
     end
     }
-
-    kicks.css(".vitals-container").collect{ |profile|
-      profiles << {
-        :profile_quote => profile.css(".vitals-text-container div.profile-quote").text,
-        :bio => kicks.css(".description-holder").css("div p").text
-        }
-      }
-      profiles.reduce Hash.new, :merge
+    profile[:profile_quote]=> profile.css(".vitals-text-container div.profile-quote").text,
+    profile[:bio] => kicks.css(".description-holder").css("div p").text
+    
+    profiles
 
   end
 
