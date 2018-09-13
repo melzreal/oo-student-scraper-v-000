@@ -28,15 +28,15 @@ class Scraper
       } elsif s.include?("github"){
         profile[:github] => s
       } elsif s.include?("linkedin"){
-        profile[:linkedin] => s      
+        profile[:linkedin] => s
       } else s.include?("blog") {
       profile[:blog] => s
       }
       end
     }
-    
-    profile[:profile_quote] => kicks.css(".vitals-container").css(".vitals-text-container div.profile-quote").text
-    profile[:bio] => kicks.css(".description-holder").css("div p").text
+
+    profile[:profile_quote] = kicks.css(".vitals-container").css(".vitals-text-container div.profile-quote").text
+    profile[:bio] = kicks.css(".description-holder").css("div p").text
 
     profile
 
